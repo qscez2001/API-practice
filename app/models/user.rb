@@ -6,7 +6,6 @@ class User < ApplicationRecord
 
   # before_create 可以確保在新紀錄「存入資料庫前」一定會觸發這個方法。
 
-
   before_create :generate_authentication_token
 
   def generate_authentication_token
