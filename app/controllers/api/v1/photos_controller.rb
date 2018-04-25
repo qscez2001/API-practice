@@ -1,5 +1,6 @@
 class Api::V1::PhotosController < ApiController
-
+  before_action :authenticate_user!, except: :index
+  
   # 我們只打算公開 title、data、description 這幾個屬性
 
   # 重新輸出 @photos 裡面的陣列，這時候會用到 map 方法，map 方法專門用於映射新陣列
