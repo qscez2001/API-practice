@@ -48,10 +48,35 @@ class Api::V1::PhotosController < ApiController
     end
   end
 
+  def update
+    @photo = Photo.find_by(id: params[:id])
+    if @photo.update(photo_params)
+      render json: {
+        message: "Photo updated successfully!",
+        result: @photo
+      }
+    else
+      render json: {
+        errors: @photo.errors
+      }
+    end
+  end
+
+  def destroy
+    @photo = Photo.find_by(id: params[:id])
+    @photo.destroy
+    render json: {
+      message: "Photo destroy successfully!"
+    }
+  end
+
   private
 
+  # 之前搭配 form_for 時，需要在中間加一層 require(:photo)，
+  # 那是因為 form_for 回傳的 Hash 結構會在最外層打包一層 photo: {.....}，
+  # 但由於 API 回傳的參數結構是你定義的 JSON 結構，你可以在 Server Log 裡觀察
   def photo_params
     params.permit(:title, :date, :description, :file_location)
   end
-  
+
 end
