@@ -1,4 +1,5 @@
 class Api::V1::AuthController < ApiController
+  # 確保要先登入，才會請求登出。
   before_action :authenticate_user!, only: :logout
 
   # 當 client 端送出「登入」請求，並附上帳號密碼，server 端驗證後回傳 token 參數，
