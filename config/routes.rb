@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :users
+  # Facebook 的資訊回來之後要怎麼接，這個部分的 callback 還沒做好，讓我們繼續設定。
+  devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   root "photos#index"
