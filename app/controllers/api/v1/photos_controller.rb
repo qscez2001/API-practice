@@ -34,4 +34,24 @@ class Api::V1::PhotosController < ApiController
     end
   end
 
+  def create
+    @photo = Photo.new(photo_params)
+    if @photo.save
+      render json: {
+        message: "Photo created successfully!",
+        result: @photo
+      }
+    else
+      render json: {
+        errors: @photo.errors
+      }
+    end
+  end
+
+  private
+
+  def photo_params
+    params.permit(:title, :date, :description, :file_location)
+  end
+  
 end
