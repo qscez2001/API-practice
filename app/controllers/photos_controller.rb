@@ -18,6 +18,10 @@ class PhotosController < ApplicationController
     end
   end
 
+  def show
+
+  end
+
   def update
     if @photo.update(photo_params)
       redirect_to photo_path(@photo)
