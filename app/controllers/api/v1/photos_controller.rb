@@ -16,6 +16,22 @@ class Api::V1::PhotosController < ApiController
     }
   end
 
-
+  def show
+    # find_by 方法在找不到物件內容時，會回傳 nil
+    # HTTP 狀態碼 400，意即「Bad Request」，表示客戶端的請求無效
+    @photo = Photo.find_by(id: params[:id])
+    if !@photo
+      render json: {
+        message: "Can't find the photo!",
+        status: 400
+      }
+    else
+      render json: {
+        title: @photo.title,
+        date: @photo.date,
+        description: @photo.description
+      }
+    end
+  end
 
 end
